@@ -56,9 +56,9 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
 
-                groupId = "com.github.burhancabiroglu"
-                artifactId = "ComposeNavExpansionKit"
-                version = "1.0"
+                groupId = 'com.github.burhancabiroglu'
+                artifactId = 'ComposeNavExpansionKit'
+                version = '1.0'
             }
         }
     }

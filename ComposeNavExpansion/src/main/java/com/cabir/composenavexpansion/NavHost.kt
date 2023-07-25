@@ -2,18 +2,18 @@ package com.cabir.composenavexpansion
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.rememberNavController
+import com.cabir.composenavexpansion.controller.AppNavHostController
+import com.cabir.composenavexpansion.controller.LocalNavHostController
+import com.cabir.composenavexpansion.controller.rememberAppNavController
 
 
 @Composable
 fun NavHost(
     modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController(),
+    navController: AppNavHostController = rememberAppNavController(),
     startDestination: String,
     route: String? = null,
     builder: NavGraphBuilder.() -> Unit
@@ -28,7 +28,3 @@ fun NavHost(
         )
     }
 }
-
-
-
-val LocalNavHostController = compositionLocalOf <NavHostController> { error("LocalNavHostController does not provided") }

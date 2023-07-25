@@ -3,6 +3,7 @@ package com.cabir.composenavexpansion
 import android.os.Bundle
 import androidx.annotation.MainThread
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -17,6 +18,7 @@ import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.get
 import androidx.navigation.navOptions
+import com.cabir.composenavexpansion.controller.LocalNavHostController
 
 
 inline fun <reified T : Fragment> NavGraphBuilder.fragment(
@@ -26,7 +28,11 @@ inline fun <reified T : Fragment> NavGraphBuilder.fragment(
     noinline content: (NavBackStackEntry) -> T
 ) {
     val fragmentContent: @Composable (NavBackStackEntry) -> Unit = {
-        ComposeFragmentContainer(fragmentGen = content, backStackEntry = it)
+        val navHostController = LocalNavHostController.current
+        val fragment = remember {
+            navHostController.manage(it.destination.route) { content(it) }
+        }
+        ComposeFragmentContainer(fragment = fragment, backStackEntry = it)
     }
 
     addDestination(

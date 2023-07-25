@@ -19,11 +19,12 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.findFragment
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.Navigation
+import com.cabir.composenavexpansion.controller.LocalNavHostController
 
 @Composable
 inline fun <reified T : Fragment> ComposeFragmentContainer(
     modifier: Modifier = Modifier,
-    crossinline fragmentGen: (NavBackStackEntry) -> T,
+    fragment: T,
     backStackEntry: NavBackStackEntry
 ) {
     val localView = LocalView.current
@@ -40,10 +41,6 @@ inline fun <reified T : Fragment> ComposeFragmentContainer(
     }
     val container = remember {
         mutableStateOf<FragmentContainerView?>(null)
-    }
-
-    val fragment = remember {
-        fragmentGen.invoke(backStackEntry)
     }
 
     val navHostController = LocalNavHostController.current

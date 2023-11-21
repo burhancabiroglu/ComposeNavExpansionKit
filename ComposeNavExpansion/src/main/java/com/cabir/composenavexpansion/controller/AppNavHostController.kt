@@ -21,6 +21,11 @@ class AppNavHostController(context: Context ): NavHostController(context) {
         iFragmentManager.set(currentBackStack.value)
         return iFragmentManager.manage(dest.toString(),fragmentFactory)
     }
+
+    fun manage(dest: String?, saveState: Boolean, fragmentFactory: ()-> Fragment): Fragment {
+        iFragmentManager.set(currentBackStack.value,saveState)
+        return iFragmentManager.manage(dest.toString(),saveState,fragmentFactory)
+    }
 }
 
 @Composable

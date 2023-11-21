@@ -10,6 +10,14 @@ class IFragmentManager {
     fun set(backStackEntry:List<NavBackStackEntry>) {
         backStackHistory.add(backStackEntry)
     }
+    fun set(backStackEntry:List<NavBackStackEntry>,saveState: Boolean) {
+        if (saveState) set(backStackEntry)
+    }
+
+    fun manage(dest: String, saveState: Boolean,fragmentFactory: () -> Fragment): Fragment {
+        return if (saveState) manage(dest,fragmentFactory)
+        else fragmentFactory()
+    }
 
     fun manage(dest: String,fragmentFactory: () -> Fragment): Fragment {
         var navTrend = NavTrend.NONE

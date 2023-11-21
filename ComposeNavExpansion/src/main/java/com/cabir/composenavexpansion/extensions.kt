@@ -2,6 +2,7 @@ package com.cabir.composenavexpansion
 
 import android.os.Bundle
 import androidx.annotation.MainThread
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.core.net.toUri
@@ -27,7 +28,7 @@ inline fun <reified T : Fragment> NavGraphBuilder.fragment(
     deepLinks: List<NavDeepLink> = emptyList(),
     noinline content: (NavBackStackEntry) -> T
 ) {
-    val fragmentContent: @Composable (NavBackStackEntry) -> Unit = {
+    val fragmentContent: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit = {
         val navHostController = LocalNavHostController.current
         val fragment = remember {
             navHostController.manage(it.destination.route) { content(it) }

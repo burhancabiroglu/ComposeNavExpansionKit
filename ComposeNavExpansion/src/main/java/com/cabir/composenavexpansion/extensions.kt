@@ -30,7 +30,7 @@ inline fun <reified T : Fragment> NavGraphBuilder.fragment(
     route: String,
     arguments: List<NamedNavArgument> = emptyList(),
     deepLinks: List<NavDeepLink> = emptyList(),
-    saveState: Boolean = false,
+    saveState: Boolean = true,
     noinline content: (NavBackStackEntry) -> T
 ) {
     val fragmentContent: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit = {
@@ -78,7 +78,7 @@ inline fun <reified T : Fragment> NavGraphBuilder.fragment(
         AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition?) =  enterTransition,
     noinline popExitTransition: (@JvmSuppressWildcards
         AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition?) = exitTransition,
-    saveState: Boolean = false,
+    saveState: Boolean = true,
     noinline content: (NavBackStackEntry) -> T
 ) {
     val fragmentContent: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit = {
